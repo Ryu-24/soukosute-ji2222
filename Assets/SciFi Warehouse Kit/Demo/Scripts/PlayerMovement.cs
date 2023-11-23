@@ -14,12 +14,15 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     Vector3 velocity;
     bool isGrounded;
+    public static PlayerMovement instance;
 
     
      public AudioClip footStepSound;
      public float footStepDelay;
  
      private float nextFootstep = 0;
+
+    public static object Instance { get; internal set; }
 
     // Update is called once per frame
     void Update()
@@ -55,6 +58,17 @@ public class PlayerMovement : MonoBehaviour
                 }
              }
          }
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
 
